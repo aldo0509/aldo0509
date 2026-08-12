@@ -1,5 +1,25 @@
 ## Hi there 👋
+👋 Hi, I'm Febrialdo Haudi
 
+Odoo / ERP Developer
+Backend Developer
+IT Professional
+
+────────────────────────────
+
+👨‍💻 About Me
+
+🛠️ Tech Stack
+
+⚙️ What I Do
+
+📌 Featured Projects
+
+📚 Currently Learning
+
+📊 GitHub Statistics
+
+🤝 Connect With Me
 <!--
 **aldo0509/aldo0509** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
