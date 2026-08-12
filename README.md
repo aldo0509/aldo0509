@@ -1,3 +1,9 @@
+<div align="center">
+
+[![Typing SVG](https://readme-typing-svg.demolab.com/?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=36BCF7&center=true&vCenter=true&width=700&lines=Hi%2C+I'm+Febrialdo+Haudi+%F0%9F%91%8B;Odoo+%2F+ERP+Developer;Backend+Developer;IT+Professional;Business+Process+Automation)](https://git.io/typing-svg)
+
+</div>
+
 # 💫 About Me:
 Odoo ERP customization, business process automation, and enterprise application development.<br>ERP, backend development, business automation, and open-source projects.<br>Enterprise software architecture and scalable systems.<br>Advanced Odoo development, system architecture, Docker, Linux, and cloud technologies.<br>Odoo, ERP customization, PHP, Laravel, SQL, backend development, and business process automation.<br>I enjoy turning manual business processes into automated systems.
 
