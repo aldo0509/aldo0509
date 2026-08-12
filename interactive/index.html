@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Febrialdo Haudi | Odoo ERP Developer</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background:
+                radial-gradient(
+                    circle at 50% 50%,
+                    #071a2b 0%,
+                    #030912 35%,
+                    #010409 70%,
+                    #000000 100%
+                );
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: #ffffff;
+            cursor: crosshair;
+        }
+
+        /* ================================
+           BACKGROUND GRID
+        ================================= */
+
+        .grid {
+            position: fixed;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 200, 255, 0.04) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(0, 200, 255, 0.04) 1px,
+                    transparent 1px
+                );
+
+            background-size: 50px 50px;
+
+            mask-image:
+                radial-gradient(
+                    circle at center,
+                    black 20%,
+                    transparent 80%
+                );
+
+            pointer-events: none;
+        }
+
+        /* ================================
+           MOUSE GLOW
+        ================================= */
+
+        .mouse-glow {
+            position: fixed;
+
+            width: 350px;
+            height: 350px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0, 200, 255, 0.12),
+                    rgba(0, 100, 255, 0.04) 40%,
+                    transparent 70%
+                );
+
+            transform:
+                translate(-50%, -50%);
+
+            pointer-events: none;
+
+            z-index: 1;
+
+            transition:
+                width 0.2s ease,
+                height 0.2s ease;
+        }
+
+        /* ================================
+           MAIN
+        ================================= */
+
+        .container {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            z-index: 2;
+        }
+
+        /* ================================
+           NEON ORB
+        ================================= */
+
+        .orb {
+            position: relative;
+
+            width: 320px;
+            height: 320px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+        }
+
+        /* Outer rotating ring */
+
+        .ring {
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            border-radius: 50%;
+
+            border:
+                2px solid rgba(0, 220, 255, 0.35);
+
+            box-shadow:
+                0 0 20px rgba(0, 200, 255, 0.4),
+                inset 0 0 20px rgba(0, 200, 255, 0.15);
+
+            animation:
+                rotate 10s linear infinite;
+        }
+
+        .ring::before,
+        .ring::after {
+            content: "";
+
+            position: absolute;
+
+            border-radius: 50%;
+        }
+
+        .ring::before {
+            width: 15px;
+            height: 15px;
+
+            top: -7px;
+            left: 50%;
+
+            background: #00eaff;
+
+            box-shadow:
+                0 0 10px #00eaff,
+                0 0 30px #00eaff,
+                0 0 60px #00eaff;
+        }
+
+        .ring::after {
+            width: 8px;
+            height: 8px;
+
+            bottom: 15px;
+            right: 20px;
+
+            background: #008cff;
+
+            box-shadow:
+                0 0 15px #008cff,
+                0 0 30px #008cff;
+        }
+
+        /* Second ring */
+
+        .ring-two {
+            position: absolute;
+
+            width: 270px;
+            height: 270px;
+
+            border-radius: 50%;
+
+            border:
+                1px dashed rgba(0, 170, 255, 0.5);
+
+            animation:
+                rotateReverse 15s linear infinite;
+        }
+
+        /* ================================
+           CORE
+        ================================= */
+
+        .core {
+            position: relative;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #ffffff 0%,
+                    #8ff8ff 5%,
+                    #00cfff 18%,
+                    #0066ff 45%,
+                    #001a40 75%,
+                    #000814 100%
+                );
+
+            box-shadow:
+                0 0 15px #00eaff,
+                0 0 40px rgba(0, 220, 255, 0.8),
+                0 0 80px rgba(0, 120, 255, 0.5),
+                inset 0 0 30px rgba(255, 255, 255, 0.3);
+
+            transition:
+                transform 0.15s ease-out;
+        }
+
+        /* Core pupil */
+
+        .pupil {
+            position: absolute;
+
+            width: 70px;
+            height: 70px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #ffffff 0%,
+                    #00ffff 10%,
+                    #008cff 30%,
+                    #00152d 70%
+                );
+
+            box-shadow:
+                0 0 15px #00ffff,
+                0 0 35px #008cff,
+                inset 0 0 15px #00ffff;
+
+            transition:
+                transform 0.08s linear;
+        }
+
+        /* Highlight */
+
+        .highlight {
+            position: absolute;
+
+            width: 25px;
+            height: 12px;
+
+            top: 35px;
+            left: 48px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.9);
+
+            filter: blur(4px);
+
+            opacity: 0.8;
+        }
+
+        /* ================================
+           TEXT
+        ================================= */
+
+        .content {
+            position: absolute;
+
+            top: calc(50% + 190px);
+
+            width: 100%;
+
+            text-align: center;
+
+            pointer-events: none;
+        }
+
+        .name {
+            font-size: 28px;
+
+            font-weight: 700;
+
+            letter-spacing: 4px;
+
+            color: #e8ffff;
+
+            text-shadow:
+                0 0 10px rgba(0, 220, 255, 0.8),
+                0 0 25px rgba(0, 150, 255, 0.5);
+        }
+
+        .role {
+            margin-top: 10px;
+
+            font-size: 14px;
+
+            letter-spacing: 5px;
+
+            color: #00d9ff;
+
+            text-transform: uppercase;
+        }
+
+        .description {
+            margin-top: 15px;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            color: rgba(210, 240, 255, 0.65);
+        }
+
+        /* ================================
+           STATUS
+        ================================= */
+
+        .status {
+            position: fixed;
+
+            top: 25px;
+            left: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            color: rgba(200, 240, 255, 0.6);
+
+            z-index: 10;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #00ffcc;
+
+            box-shadow:
+                0 0 10px #00ffcc;
+
+            animation:
+                pulse 1.5s infinite;
+        }
+
+        /* ================================
+           ANIMATIONS
+        ================================= */
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotateReverse {
+            from {
+                transform: rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 600px) {
+
+            .orb {
+                width: 240px;
+                height: 240px;
+            }
+
+            .ring-two {
+                width: 205px;
+                height: 205px;
+            }
+
+            .core {
+                width: 135px;
+                height: 135px;
+            }
+
+            .pupil {
+                width: 55px;
+                height: 55px;
+            }
+
+            .content {
+                top: calc(50% + 150px);
+            }
+
+            .name {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+
+            .role {
+                font-size: 10px;
+                letter-spacing: 3px;
+            }
+
+            .description {
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="grid"></div>
+
+    <div class="mouse-glow" id="mouseGlow"></div>
+
+    <div class="status">
+        <span class="status-dot"></span>
+        SYSTEM ONLINE
+    </div>
+
+    <main class="container">
+
+        <div class="orb" id="orb">
+
+            <div class="ring"></div>
+
+            <div class="ring-two"></div>
+
+            <div class="core" id="core">
+
+                <div
+                    class="pupil"
+                    id="pupil">
+                </div>
+
+                <div class="highlight"></div>
+
+            </div>
+
+        </div>
+
+        <div class="content">
+
+            <div class="name">
+                FEBRIALDO HAUDI
+            </div>
+
+            <div class="role">
+                Odoo / ERP Developer
+            </div>
+
+            <div class="description">
+                ERP • AUTOMATION • BACKEND • DATABASE
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+
+        const orb = document.getElementById("orb");
+        const core = document.getElementById("core");
+        const pupil = document.getElementById("pupil");
+        const mouseGlow = document.getElementById("mouseGlow");
+
+        document.addEventListener("mousemove", (event) => {
+
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            /*
+             * ================================
+             * MOUSE GLOW
+             * ================================
+             */
+
+            mouseGlow.style.left = mouseX + "px";
+            mouseGlow.style.top = mouseY + "px";
+
+
+            /*
+             * ================================
+             * ORB POSITION
+             * ================================
+             */
+
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            const offsetX = (mouseX - centerX) * 0.025;
+            const offsetY = (mouseY - centerY) * 0.025;
+
+            orb.style.transform =
+                `translate(${offsetX}px, ${offsetY}px)`;
+
+
+            /*
+             * ================================
+             * PUPIL FOLLOW MOUSE
+             * ================================
+             */
+
+            const rect = core.getBoundingClientRect();
+
+            const coreCenterX =
+                rect.left + rect.width / 2;
+
+            const coreCenterY =
+                rect.top + rect.height / 2;
+
+            const dx = mouseX - coreCenterX;
+            const dy = mouseY - coreCenterY;
+
+            const distance =
+                Math.sqrt(dx * dx + dy * dy);
+
+            const maxDistance = 35;
+
+            let moveX = 0;
+            let moveY = 0;
+
+            if (distance > 0) {
+
+                moveX =
+                    (dx / distance) *
+                    Math.min(distance / 8, maxDistance);
+
+                moveY =
+                    (dy / distance) *
+                    Math.min(distance / 8, maxDistance);
+            }
+
+            pupil.style.transform =
+                `translate(${moveX}px, ${moveY}px)`;
+
+
+            /*
+             * ================================
+             * CORE REACT TO MOUSE
+             * ================================
+             */
+
+            const screenX =
+                (mouseX / window.innerWidth - 0.5);
+
+            const screenY =
+                (mouseY / window.innerHeight - 0.5);
+
+            const rotateX =
+                screenY * -8;
+
+            const rotateY =
+                screenX * 8;
+
+            core.style.transform =
+                `rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)`;
+
+        });
+
+
+        /*
+         * ================================
+         * MOUSE LEAVE
+         * ================================
+         */
+
+        document.addEventListener("mouseleave", () => {
+
+            pupil.style.transform =
+                "translate(0px, 0px)";
+
+            core.style.transform =
+                "rotateX(0deg) rotateY(0deg)";
+
+            orb.style.transform =
+                "translate(0px, 0px)";
+        });
+
+    </script>
+
+</body>
+</html>
