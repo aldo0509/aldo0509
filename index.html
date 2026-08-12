@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Febrialdo Haudi | Interactive</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #05070d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Background glow */
+        .glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0, 195, 255, 0.16) 0%,
+                    rgba(0, 195, 255, 0.05) 35%,
+                    transparent 70%
+                );
+            filter: blur(10px);
+        }
+
+        /* Main Neo Circle */
+        .neo {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #17233b,
+                    #080b13 55%,
+                    #020307 100%
+                );
+
+            border: 2px solid rgba(0, 220, 255, 0.7);
+
+            box-shadow:
+                0 0 20px rgba(0, 210, 255, 0.4),
+                0 0 60px rgba(0, 170, 255, 0.2),
+                inset 0 0 40px rgba(0, 180, 255, 0.12);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Eye */
+        .eye {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #101a2d 0%,
+                    #05070d 70%
+                );
+
+            border: 2px solid rgba(0, 220, 255, 0.5);
+
+            box-shadow:
+                0 0 20px rgba(0, 220, 255, 0.3),
+                inset 0 0 25px rgba(0, 220, 255, 0.15);
+        }
+
+        /* Pupil */
+        .pupil {
+            position: absolute;
+
+            width: 55px;
+            height: 55px;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #8fffff,
+                    #00d9ff 30%,
+                    #008cff 65%,
+                    #003b69 100%
+                );
+
+            box-shadow:
+                0 0 15px #00d9ff,
+                0 0 35px rgba(0, 200, 255, 0.8),
+                0 0 70px rgba(0, 120, 255, 0.5);
+
+            transition:
+                left 0.08s linear,
+                top 0.08s linear;
+        }
+
+        /* Highlight */
+        .highlight {
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+
+            background: white;
+
+            top: 10px;
+            left: 12px;
+
+            box-shadow:
+                0 0 10px white,
+                0 0 20px #00d9ff;
+        }
+
+        /* Small particles */
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #00d9ff;
+            box-shadow: 0 0 8px #00d9ff;
+            opacity: 0.7;
+        }
+
+        .p1 { top: 20%; left: 20%; }
+        .p2 { top: 70%; left: 15%; }
+        .p3 { top: 25%; right: 18%; }
+        .p4 { bottom: 18%; right: 20%; }
+        .p5 { top: 10%; left: 50%; }
+        .p6 { bottom: 10%; left: 40%; }
+
+        .title {
+            position: absolute;
+            bottom: 80px;
+
+            text-align: center;
+
+            color: #00d9ff;
+
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 4px;
+
+            text-shadow:
+                0 0 10px rgba(0, 217, 255, 0.8),
+                0 0 25px rgba(0, 150, 255, 0.5);
+        }
+
+        .subtitle {
+            position: absolute;
+            bottom: 45px;
+
+            color: rgba(255,255,255,0.55);
+
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .neo {
+                width: 220px;
+                height: 220px;
+            }
+
+            .eye {
+                width: 120px;
+                height: 120px;
+            }
+
+            .pupil {
+                width: 45px;
+                height: 45px;
+            }
+
+            .title {
+                font-size: 16px;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="scene">
+
+    <div class="glow"></div>
+
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+    <div class="particle p5"></div>
+    <div class="particle p6"></div>
+
+    <div class="neo">
+
+        <div class="eye">
+
+            <div class="pupil">
+                <div class="highlight"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="title">
+        FEBRIALDO HAUDI
+    </div>
+
+    <div class="subtitle">
+        ODOO / ERP DEVELOPER
+    </div>
+
+</div>
+
+<script>
+
+    const pupil = document.querySelector(".pupil");
+
+    document.addEventListener("mousemove", (event) => {
+
+        const eye = document.querySelector(".eye");
+
+        const rect = eye.getBoundingClientRect();
+
+        const eyeCenterX = rect.left + rect.width / 2;
+        const eyeCenterY = rect.top + rect.height / 2;
+
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+
+        let dx = mouseX - eyeCenterX;
+        let dy = mouseY - eyeCenterY;
+
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        const maxDistance = 45;
+
+        if (distance > maxDistance) {
+
+            dx = (dx / distance) * maxDistance;
+            dy = (dy / distance) * maxDistance;
+
+        }
+
+        pupil.style.left =
+            `calc(50% + ${dx}px)`;
+
+        pupil.style.top =
+            `calc(50% + ${dy}px)`;
+
+    });
+
+</script>
+
+</body>
+</html>
